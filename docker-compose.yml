@@ -1,0 +1,21 @@
+services:
+  gateway:
+    build: ./VyshBuild.Gateway
+    ports:
+      - "6765:6765"
+    environment:
+      STORE_URL: http://store:6767
+      ANALYZE_URL: http://analyze:6766
+    depends_on:
+      - store
+      - analyze
+
+  store:
+    build: ./VyshBuild.Store
+    ports:
+      - "6767:6767"
+
+  analyze:
+    build: ./VyshBuild.Analyze
+    ports:
+      - "6766:6766"
